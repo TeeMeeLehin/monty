@@ -38,10 +38,13 @@ char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void push(char **tokens, unsigned int line_no, stack_t **rack);
-void pall(stack_t *rack);
+extern char *data;
+
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void tokenizer(char *input, char *inputs[]);
-void pint(stack_t *rack);
-void pop(stack_t **rack, unsigned int line_no);
+void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void (*get_opcode(char *str))(stack_t **stack, unsigned int line_number);
 
 #endif

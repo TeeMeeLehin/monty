@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
 * main - simple shell main function
@@ -11,9 +11,10 @@ int main(int argc, char *argv[])
 FILE *file;
 char *line = NULL;
 size_t line_len = 0;
-unsigned int line_no = 1;
 char *tokens[5];
-stack_t *rack = NULL;
+unsigned int line_number;
+stack_t *stack = NULL;
+void (*f)(stack_t **stack, unsigned int line_number);
 
 if (argc != 2)
 {
@@ -27,31 +28,19 @@ fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 exit(EXIT_FAILURE);
 }
 
+line_number = 1;
 while (getline(&line, &line_len, file) != -1)
 {
 tokenizer(line, tokens);
-if (strcmp(tokens[0], "push") == 0)
+data = tokens[1];
+f = get_opcode(tokens[0]);
+if (!f)
 {
-push(tokens, line_no, &rack);
-}
-else if (strncmp(tokens[0], "pall", 4) == 0)
-{
-pall(rack);
-}
-else if (strcmp(tokens[0], "pint") == 0)
-{
-pint(rack);
-}
-else if (strcmp(tokens[0], "pop") == 0)
-{
-pop(&rack, line_no);
-}
-else
-{
-fprintf(stderr, "L%d: unknown instruction %s\n", line_no, tokens[0]);
+fprintf(stderr, "L%d: unknown instruction %s\n", line_number, tokens[0]);
 exit(EXIT_FAILURE);
 }
-line_no++;
+f(&stack, line_number);
+line_number++;
 }
 free(line);
 fclose(file);

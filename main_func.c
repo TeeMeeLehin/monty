@@ -1,16 +1,15 @@
-#include "main.h"
+#include "monty.h"
 
 /**
 * push - function to add to a stack
-* @tokens: tokenized inputs
-* @line_no: line number of instruction
-* @rack: existing stack
+* @line_number: line number of instruction
+* @stack: existing stack
 * Return: void
 */
-void push(char **tokens, unsigned int line_no, stack_t **rack)
+void push(stack_t **stack, unsigned int line_number)
 {
 stack_t *new_rack = malloc(sizeof(stack_t));
-int element = atoi(tokens[1]);
+int element = atoi(data);
 
 if (!new_rack)
 {
@@ -18,9 +17,9 @@ fprintf(stderr, "Error: malloc failed\n");
 exit(EXIT_FAILURE);
 }
 
-if (!tokens[1] || tokens[1][0] == '\0')
+if (!data || data[0] == '\0')
 {
-fprintf(stderr, "L%d: usage: push integer\n", line_no);
+fprintf(stderr, "L%d: usage: push integer\n", line_number);
 free(new_rack);
 exit(EXIT_FAILURE);
 }
@@ -28,65 +27,68 @@ exit(EXIT_FAILURE);
 
 new_rack->n = element;
 new_rack->prev = NULL;
-new_rack->next = *rack;
+new_rack->next = *stack;
 
-if (*rack)
+if (*stack)
 {
-(*rack)->prev = new_rack;
+(*stack)->prev = new_rack;
 }
 
-*rack = new_rack;
+*stack = new_rack;
 
 }
 
 /**
 * pall - printing all elements in a stack
-* @rack: the input stack
+* @stack: the input stack
 * Return: void
 */
-void pall(stack_t *rack)
+void pall(stack_t **stack, unsigned int line_number)
 {
-stack_t *temp = rack;
+stack_t *temp = *stack;
 while (temp != NULL)
 {
 printf("%d\n", temp->n);
 temp = temp->next;
 }
+(void)line_number;
 }
 
 /**
 * pint - printing the stack's top element
-* @rack: the input stack
+* @stack: the input stack
 * Return: void
 */
-void pint(stack_t *rack)
+void pint(stack_t **stack, unsigned int line_number)
 {
-stack_t *temp = rack;
+stack_t *temp = *stack;
 printf("%d\n", temp->n);
+(void)line_number;
 }
 
 /**
 * pop - popping the stack
-* @rack: the input stack
+* @stack: the input stack
+* @line_number: line number of instruction
 * Return: void
 */
-void pop(stack_t **rack, unsigned int line_no)
+void pop(stack_t **stack, unsigned int line_number)
 {
-stack_t *temp = *rack;
+stack_t *temp = *stack;
 if (!temp)
 {
-fprintf(stderr, "L%d: can't pop an empty stack\n", line_no);
+fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 exit(EXIT_FAILURE);
 }
 if (temp->next == NULL)
 {
 free(temp);
-*rack = NULL;
+*stack = NULL;
 }
 else
 {
-*rack = (*rack)->next;
-(*rack)->prev = NULL;
+*stack = (*stack)->next;
+(*stack)->prev = NULL;
 free(temp);
 }
 }
