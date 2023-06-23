@@ -36,7 +36,6 @@ if (*rack)
 }
 
 *rack = new_rack;
-
 }
 
 /**

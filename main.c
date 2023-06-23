@@ -9,8 +9,7 @@
 int main(int argc, char *argv[])
 {
 FILE *file;
-char *line = NULL;
-size_t line_len = 0;
+char line[100];
 unsigned int line_no = 1;
 char *tokens[5];
 stack_t *rack = NULL;
@@ -27,10 +26,9 @@ fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 exit(EXIT_FAILURE);
 }
 
-while (getline(&line, &line_len, file) != -1)
+while (fgets(line, 100, file) != NULL)
 {
 tokenizer(line, tokens);
-free(line);
 if (strcmp(tokens[0], "push") == 0)
 {
 push(tokens, line_no, &rack);
@@ -52,6 +50,7 @@ else
 fprintf(stderr, "L%d: unknown instruction %s\n", line_no, tokens[0]);
 exit(EXIT_FAILURE);
 }
+
 line_no++;
 }
 fclose(file);
