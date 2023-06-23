@@ -11,6 +11,7 @@ void push(char **tokens, unsigned int line_no, stack_t **rack)
 {
 stack_t *new_rack = malloc(sizeof(stack_t));
 int element = atoi(tokens[1]);
+int i;
 
 if (!new_rack)
 {
@@ -23,6 +24,16 @@ if (!tokens[1] || tokens[1][0] == '\0')
 fprintf(stderr, "L%d: usage: push integer\n", line_no);
 free(new_rack);
 exit(EXIT_FAILURE);
+}
+
+for(i = 0; tokens[1][i] != '\0', i++)
+{
+if (isdigit(tokens[1][i]) == 0)
+{
+fprintf(stderr, "L%d: usage: push integer\n", line_no);
+free(new_rack);
+exit(EXIT_FAILURE);
+}
 }
 
 
