@@ -45,6 +45,10 @@ else if (strcmp(tokens[0], "pop") == 0)
 {
 pop(&rack, line_no);
 }
+else if (strcmp(tokens[0], "swap") == 0)
+{
+swap(&rack, line_no);
+}
 else
 {
 fprintf(stderr, "L%d: unknown instruction %s\n", line_no, tokens[0]);
