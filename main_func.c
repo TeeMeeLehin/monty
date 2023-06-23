@@ -115,7 +115,7 @@ temp->next->n = n;
 * void - does nothing
 * Return: void
 */
-void nop(void)
+void nop(stack_t **rack)
 {
-return;
+(void)*rack;
 }

@@ -51,7 +51,7 @@ swap(&rack, line_no);
 }
 else if (strcmp(tokens[0], "nop") == 0)
 {
-nop();
+nop(&rack);
 }
 else
 {
