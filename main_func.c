@@ -11,7 +11,6 @@ void push(char **tokens, unsigned int line_no, stack_t **rack)
 {
 stack_t *new_rack = malloc(sizeof(stack_t));
 int element = atoi(tokens[1]);
-int i;
 
 if (!new_rack)
 {

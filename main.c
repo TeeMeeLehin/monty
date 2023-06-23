@@ -9,11 +9,9 @@
 int main(int argc, char *argv[])
 {
 FILE *file;
-char line[100];
+char line[100], *tokens[5];
 unsigned int line_no = 1;
-char *tokens[5];
 stack_t *rack = NULL;
-
 if (argc != 2)
 {
 fprintf(stderr, "USAGE: monty file\n");
@@ -25,7 +23,6 @@ if (file == NULL)
 fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 exit(EXIT_FAILURE);
 }
-
 while (fgets(line, 100, file) != NULL)
 {
 tokenizer(line, tokens);
@@ -62,7 +59,6 @@ else
 fprintf(stderr, "L%d: unknown instruction %s\n", line_no, tokens[0]);
 exit(EXIT_FAILURE);
 }
-
 line_no++;
 }
 fclose(file);
