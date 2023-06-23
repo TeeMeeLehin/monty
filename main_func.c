@@ -110,3 +110,12 @@ n = temp->n;
 temp->n = temp->next->n;
 temp->next->n = n;
 }
+
+/**
+* void - does nothing
+* Return: void
+*/
+void nop(void)
+{
+return;
+}

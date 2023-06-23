@@ -49,6 +49,10 @@ else if (strcmp(tokens[0], "swap") == 0)
 {
 swap(&rack, line_no);
 }
+else if (strcmp(tokens[0], "nop") == 0)
+{
+nop();
+}
 else
 {
 fprintf(stderr, "L%d: unknown instruction %s\n", line_no, tokens[0]);
