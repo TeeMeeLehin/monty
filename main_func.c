@@ -26,17 +26,6 @@ free(new_rack);
 exit(EXIT_FAILURE);
 }
 
-for(i = 0; tokens[1][i] != '\0', i++)
-{
-if (isdigit(tokens[1][i]) == 0)
-{
-fprintf(stderr, "L%d: usage: push integer\n", line_no);
-free(new_rack);
-exit(EXIT_FAILURE);
-}
-}
-
-
 new_rack->n = element;
 new_rack->prev = NULL;
 new_rack->next = *rack;
