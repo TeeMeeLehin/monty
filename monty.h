@@ -44,6 +44,7 @@ void tokenizer(char *input, char *inputs[]);
 void pint(stack_t *rack);
 void pop(stack_t **rack, unsigned int line_no);
 void swap(stack_t **rack, unsigned int line_no);
-void nop(stack_t **rack);
+void nop(void);
+void add(stack_t **rack, unsigned int line_no);
 
 #endif
